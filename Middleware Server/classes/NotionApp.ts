@@ -22,22 +22,55 @@ export default class NotionApp {
       );
   }
 
-  async getPageNbOfWords(page: Page) {
+  async getPageWordsRecursively(page: Page) {
     const blockId = page.id;
     const response = await this.notion.blocks.children.list({
       block_id: blockId,
     });
 
-    NotionApp.writeObjToFile(response.results);
+    const words = [];
+    for (const result of response.results) {
+      console.log("========================================");
+      console.log(result);
 
-    const res = response.results;
-    let temp = res.map((result: any) => {
-      if (result.type === "child_page") return result.child_page.title;
-      else return result[result.type]?.text[0]?.plain_text;
-    });
+      // @ts-ignore-next-line
+      if (result.type === "child_page") {
+        console.log("==== BRX1");
+        words.push(
+          await new Promise(async (resolve, reject) => {
+            resolve(
+              // @ts-ignore-next-line
+              result.child_page.title +
+                " " +
+                (await this.getPageWordsRecursively(new Page(result.id)))
+                  .filter((v: any) => v?.length > 0)
+                  .join(" ")
+            );
+          })
+        );
+      } else {
+        console.log("==== BRX2");
+        words.push(
+          await new Promise((resolve, reject) => {
+            // @ts-ignore-next-line
+            resolve(result[result.type]?.text[0]?.plain_text);
+          })
+        );
+      }
+    }
 
-    temp = temp
-      .filter((v) => v?.length > 0)
+    return words;
+  }
+
+  async getPageNbOfWords(page: Page) {
+    const pageWords: any = await this.getPageWordsRecursively(page);
+
+    console.log("FINAL");
+    console.log(pageWords);
+    console.log("==== FINAL");
+
+    const temp = pageWords
+      .filter((v: any) => v?.length > 0)
       .join(" ")
       .split(" ");
 
