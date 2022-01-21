@@ -33,7 +33,8 @@ const main = () => {
     const integrationToken = document.getElementById("integration-token").value;
     const pageId = document.getElementById("page-id").value;
 
-    document.getElementById("result").innerHTML = "";
+    document.getElementById("result").style.display = "none";
+    document.getElementById("loading-spinner").style.display = "inline-block";
 
     fetch("http://localhost:5000/api/count-words-in-page", {
       method: "POST",
@@ -56,6 +57,10 @@ const main = () => {
       .catch((error) => {
         console.error("Error: ", error);
         document.getElementById("result").innerHTML = "Error";
+      })
+      .finally(() => {
+        document.getElementById("result").style.display = "initial";
+        document.getElementById("loading-spinner").style.display = "none";
       });
   });
 };
