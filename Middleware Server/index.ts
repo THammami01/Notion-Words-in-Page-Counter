@@ -10,22 +10,24 @@ app.use(express.json());
 
 app.post("/api/count-words-in-page", async (req: Request, res: Response) => {
   const token = req.headers.authorization as string;
-  const pageId = req.params.pageId as string;
+  const pageId = req.body.pageId as string;
 
-  const notion = new NotionApp(token);
+  console.log(token, pageId);
 
-  // const rootPages = await notion.getRootPages();
-  // // tslint:disable-next-line: no-console
-  // console.log(rootPages);
+  if (!token || !pageId) {
+    res.sendStatus(400);
+  } else {
+    const notion = new NotionApp(token);
 
-  const nbOfWords = await notion.getPageNbOfWords(new Page(pageId));
-  // tslint:disable-next-line: no-console
-  console.log(nbOfWords);
+    const nbOfWords = await notion.getPageNbOfWords(
+      new Page(NotionApp.getUUID(pageId))
+    );
+    console.log(nbOfWords);
 
-  res.send({ nbOfWords });
+    res.send({ nbOfWords });
+  }
 });
 
 app.listen(5000, () => {
-  // tslint:disable-next-line: no-console
   console.log("SERVER IS RUNNING AT: http://localhost:5000");
 });

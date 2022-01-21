@@ -6,6 +6,9 @@ const main = () => {
   if (integrationToken)
     document.getElementById("integration-token").value = integrationToken;
 
+  const pageId = localStorage.getItem("page-id");
+  if (pageId) document.getElementById("page-id").value = pageId;
+
   document.getElementById("theme-switcher").addEventListener("click", () => {
     if (document.body.classList.contains("custom-dark-theme")) {
       document.body.classList.remove("custom-dark-theme");
@@ -22,9 +25,15 @@ const main = () => {
       localStorage.setItem("integration-token", e.target.value);
     });
 
+  document.getElementById("page-id").addEventListener("change", (e) => {
+    localStorage.setItem("page-id", e.target.value);
+  });
+
   document.getElementById("count").addEventListener("click", () => {
     const integrationToken = document.getElementById("integration-token").value;
     const pageId = document.getElementById("page-id").value;
+
+    document.getElementById("result").innerHTML = "";
 
     fetch("http://localhost:5000/api/count-words-in-page", {
       method: "POST",

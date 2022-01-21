@@ -17,7 +17,8 @@
     "indent": [true, "spaces"],
     "semicolon": [true, "always"],
     "max-file-line-count": [true, 100],
-    "eofline": true
+    "eofline": true,
+    "no-console": false
   },
   "jsRules": {
     "max-line-length": {
