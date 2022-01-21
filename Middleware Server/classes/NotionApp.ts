@@ -43,7 +43,7 @@ export default class NotionApp {
               result.child_page.title +
                 " " +
                 (await this.getPageWordsRecursively(new Page(result.id)))
-                  .filter((v: any) => v?.length > 0)
+                  .filter((v: any) => v?.trim()?.length > 0)
                   .join(" ")
             );
           })
@@ -70,9 +70,13 @@ export default class NotionApp {
     console.log("==== FINAL");
 
     const temp = pageWords
-      .filter((v: any) => v?.length > 0)
       .join(" ")
-      .split(" ");
+      .split(" ")
+      .filter((v: any) => v?.trim()?.length > 0);
+
+    console.log("FINAL");
+    console.log(temp);
+    console.log("==== FINAL");
 
     return temp.length;
   }
@@ -84,6 +88,6 @@ export default class NotionApp {
   }
 
   static writeObjToFile(obj: any) {
-    fs.writeFileSync("./data.json", JSON.stringify(obj, null, 2), "utf-8");
+    fs.writeFileSync("./test-data.json", JSON.stringify(obj, null, 2), "utf-8");
   }
 }
