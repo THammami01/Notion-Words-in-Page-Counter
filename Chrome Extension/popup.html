@@ -2,13 +2,16 @@
 <html>
   <head>
     <title>Notion Words-in-Page Counter</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans"
       rel="stylesheet"
       type="text/css"
     />
     <link rel="stylesheet" href="popup.css" />
-    <script src="popup.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
   <body>
@@ -18,22 +21,27 @@
         <span>Words-in-Page Counter</span>
       </h1>
     </div>
+
     <div class="modal-content">
       <p>Count the number of words in a Notion page and its sub-pages.</p>
     </div>
+
     <div class="modal-icons">
       <div class="flex-container custom-form">
         <div>
           <label for="integration-token">Integration Token *</label>
           <input type="password" id="integration-token" type="text" />
         </div>
+
         <div>
           <label for="page-id">Page ID *</label>
           <input id="page-id" type="text" />
         </div>
+
         <div>
           <button id="count">Count</button>
         </div>
+
         <div class="last-row">
           <p>Result: <span id="result">N/A</span></p>
           <div class="imgs">
@@ -43,7 +51,7 @@
               id="theme-switcher"
             />
 
-            <a href="https://github.com/THammami01" target="_blank">
+            <a href="https://github.com/THammami01/Notion-Words-in-Page-Counter" target="_blank">
               <img
                 src="https://img.icons8.com/ios-glyphs/30/000000/github.png"
                 title="@THammami01"
@@ -54,5 +62,7 @@
         </div>
       </div>
     </div>
+
+    <script src="popup.js"></script>
   </body>
 </html>

@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "Middleware Server/node_modules": true,
+    "Middleware Server/package-lock.json": true,
+    "Middleware Server/package.json": true
+  }
+}

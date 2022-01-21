@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Notion Words-in-Page Counter",
-  "description": "Count the number of words in a Notion page and its sub-pages.",
+  "description": "Count the number of words in a Notion page and its sub-pages recursively.",
   "version": "1.0.0",
   "icons": { "128": "icon.png" },
   "browser_action": {
@@ -9,5 +9,5 @@
     "default_popup": "popup.html"
   },
   "permissions": ["activeTab"],
-  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://unpkg.com/axios/dist/axios.min.js; script-src 'self' https://apis.google.com; object-src 'self'"
 }
