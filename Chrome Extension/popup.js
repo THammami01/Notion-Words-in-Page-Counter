@@ -37,7 +37,7 @@ const main = () => {
     document.getElementById("loading-spinner").style.display = "inline-block";
 
     fetch(
-      "https://notion-words-in-page-counter.herokuapp.com/api/count-words-in-page",
+      "http://localhost:5000/api/count-words-in-page",
       {
         method: "POST",
         headers: {

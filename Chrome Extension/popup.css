@@ -142,7 +142,7 @@ button {
 .lds-facebook {
   display: inline-block;
   position: relative;
-  transform: scale(0.3) translateX(-130px) translateY(-40px);
+  transform: scale(0.3) translateX(-135px) translateY(-40px);
 }
 
 .lds-facebook div {
